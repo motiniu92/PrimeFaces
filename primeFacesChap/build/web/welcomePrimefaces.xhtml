@@ -1,0 +1,370 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>PrimeFaces</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    Header
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    Footer
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
+                    <p:menu>
+                        <p:submenu label="Resources">
+                            <p:menuitem value="Demo" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
+                            <p:menuitem value="Documentation" url="http://www.primefaces.org/documentation.html" />
+                            <p:menuitem value="Forum" url="http://forum.primefaces.org/" />
+                            <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
+
+                        </p:submenu>
+
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    Welcome to PrimeFaces
+
+
+                    <h:form>
+                        <p:growl id="msgs" showDetail="true" />
+
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <p:outputLabel value="Simple:" for="acSimple" />
+                            <p:autoComplete id="acSimple" value="#{autoCompleteView.txt1}" completeMethod="#{autoCompleteView.completeText}" />
+
+                            <p:outputLabel value="Min Length (3):" for="acMinLength" />
+                            <p:autoComplete id="acMinLength" minQueryLength="3" value="#{autoCompleteView.txt2}" completeMethod="#{autoCompleteView.completeText}" effect="fade" />
+                        </h:panelGrid>     
+                    </h:form>
+
+
+                    <h:form>    
+                        <h3 style="margin-top: 0">AutoComplete</h3>
+                        <p>Following inputTextarea send a query for each word that has at least 4 characters to the complete method. Try typing "PrimeFaces".</p>
+                        <p:inputTextarea rows="10" cols="50" completeMethod="#{inputTextareaView.completeArea}" queryDelay="750" minQueryLength="4" />
+
+                        <h3>AutoResize</h3>
+                        <p:inputTextarea rows="6" cols="33" />
+
+                        <h3>Remaining Chars</h3>
+                        <p:inputTextarea rows="5" cols="30" counter="display" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false" />
+                        <br />
+                        <h:outputText id="display" />
+                    </h:form>
+
+
+                    <h:form>
+                        <p:growl id="msgs" />
+
+                        <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                            <h:outputText value="I accept terms and conditions: " />
+                            <p:selectBooleanButton id="value1" value="#{selectBooleanView.value1}" onLabel="Yes" offLabel="No" style="width:60px" />
+
+                            <h:outputText value="Subscribe me to newsletter: " />
+                            <p:selectBooleanButton id="value2" value="#{selectBooleanView.value2}" onLabel="Yes" offLabel="No" onIcon="pi pi-check" offIcon="pi pi-times" style="width:60px">
+                                <p:ajax update="msgs" listener="#{selectBooleanView.addMessage}" />
+                            </p:selectBooleanButton>
+                        </h:panelGrid>
+
+                        <p:commandButton id="submit" value="Submit" update="display" icon="pi pi-check" oncomplete="PF('dlg').show()" />
+
+                        <p:dialog id="dialog" header="Values" modal="true" resizable="false" showEffect="fade" widgetVar="dlg">
+                            <h:panelGrid columns="1" id="display">
+                                <h:outputText value="Value 1: #{selectBooleanView.value1}" />
+                                <h:outputText value="Value 2: #{selectBooleanView.value2}" />
+                            </h:panelGrid>
+                        </p:dialog>
+                    </h:form>
+
+                    <h:form>
+                        <p:growl id="msg" />
+
+                        <h:panelGrid columns="1" style="margin-bottom:10px" cellpadding="5">
+                            <p:selectBooleanCheckbox value="#{selectBooleanView.value1}" itemLabel="Basic"/>
+
+                            <p:selectBooleanCheckbox value="#{selectBooleanView.value2}" itemLabel="Ajax">
+                                <p:ajax update="msg" listener="#{selectBooleanView.addMessage}" />
+                            </p:selectBooleanCheckbox>
+                        </h:panelGrid>
+
+                        <p:commandButton value="Submit" icon="pi pi-check" update="display" oncomplete="PF('dlg').show()" />
+
+                        <p:dialog header="Values" modal="true" resizable="false" showEffect="fade" widgetVar="dlg">
+                            <h:panelGrid columns="1" id="display">
+                                <h:outputText value="Value 1: #{selectBooleanView.value1}" />
+                                <h:outputText value="Value 2: #{selectBooleanView.value2}" />
+                            </h:panelGrid>
+                        </p:dialog>
+                    </h:form>
+
+
+                    <h:form>
+                        <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                            <h:outputText value="Platform:" />
+                            <p:selectOneButton value="#{selectOneView.option}">
+                                <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+                                <f:selectItem itemLabel="PS4" itemValue="PS4" />
+                                <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+                            </p:selectOneButton>
+
+                            <p:commandButton value="Submit" update="display" icon="pi pi-check" />
+                            <p:spacer />
+
+                            <h:outputText value="Selected:" />
+                            <h:outputText id="display" value="#{selectOneView.option}" style="font-weight: bold" />
+                        </h:panelGrid>
+                    </h:form>
+
+
+                    <h:form>
+                        <h:panelGrid columns="2" cellpadding="5">
+
+                            <h:outputLabel for="menu" value="Basic:" />
+                            <p:selectCheckboxMenu id="menu" value="#{checkboxView.selectedCities}" label="Cities"
+                                                  filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
+                                <f:selectItems value="#{checkboxView.cities}" />
+                            </p:selectCheckboxMenu>
+
+                            <h:outputLabel for="multiple" value="Multiple:" />
+                            <p:selectCheckboxMenu id="multiple" value="#{checkboxView.selectedCities2}" label="Cities" 
+                                                  filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
+                                <f:selectItems value="#{checkboxView.cities}" />
+                            </p:selectCheckboxMenu>
+
+                            <h:outputLabel for="grouped" value="Grouped:" />
+                            <p:selectCheckboxMenu id="grouped" value="#{checkboxView.selectedCars}" label="Cars" 
+                                                  filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
+                                <f:selectItems value="#{checkboxView.cars}" />
+                            </p:selectCheckboxMenu>
+                        </h:panelGrid>
+                    </h:form>
+
+                    <h:form>    
+                        <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                            <p:outputLabel for="console" value="Basic:" />
+                            <p:selectOneMenu id="console" value="#{selectOneMenuView.console}" style="width:125px">
+                                <f:selectItem itemLabel="Select One" itemValue="" />
+                                <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+                                <f:selectItem itemLabel="PS4" itemValue="PS4" />
+                                <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+                            </p:selectOneMenu>
+
+                            <p:outputLabel for="car" value="Grouping: " />
+                            <p:selectOneMenu id="car" value="#{selectOneMenuView.car}">
+                                <f:selectItem itemLabel="Select One" itemValue="" />
+                                <f:selectItems value="#{selectOneMenuView.cars}" />
+                            </p:selectOneMenu>
+                        </h:panelGrid>
+                    </h:form>
+
+
+                    <h:form>
+                        <h3 style="margin-top:0">Addons</h3>
+                        <div class="ui-g ui-fluid">
+                            <div class="ui-g-12 ui-md-4">
+                                <div class="ui-inputgroup">
+                                    <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
+                                    <p:inputText placeholder="Username" />      
+                                </div>
+                            </div>
+
+                            <div class="ui-g-12 ui-md-4">
+                                <div class="ui-inputgroup">
+                                    <span class="ui-inputgroup-addon">$</span>
+                                    <p:inputText placeholder="Price" />
+                                    <span class="ui-inputgroup-addon">.00</span>      
+                                </div>
+                            </div>
+
+                            <div class="ui-g-12 ui-md-4">
+                                <div class="ui-inputgroup">
+                                    <span class="ui-inputgroup-addon">www</span>
+                                    <p:inputText placeholder="Website" />   
+                                </div>
+                            </div>
+                        </div>
+
+                    </h:form>
+
+
+                    <h:form>
+                        <p:panelGrid class="ui-noborder">  
+                            <f:facet name="header">  
+                                <p:row>  
+                                    <p:column style="font-weight: bold;">inputNumber</p:column>  
+                                    <p:column style="font-weight: bold;">Numeric Value</p:column>  
+                                    <p:column style="font-weight: bold;">Description</p:column>  
+                                </p:row>  
+                            </f:facet>
+
+                        </p:panelGrid>
+                    </h:form>
+
+                    <h:form>
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <p:outputLabel for="date" value="Date: " />
+                            <p:inputMask id="date" value="#{maskView.date}" mask="99/99/9999"/>
+
+                            <p:outputLabel for="phone" value="Phone:" />
+                            <p:inputMask id="phone" value="#{maskView.phone}" mask="(999) 999-9999"/>
+
+                            <p:outputLabel for="phoneWithExt" value="Phone with Ext:" />
+                            <p:inputMask id="phoneWithExt" value="#{maskView.phoneExt}" mask="(999) 999-9999? x99999"/>
+
+                            <p:outputLabel for="taxId" value="Tax Id:" />
+                            <p:inputMask id="taxId" value="#{maskView.taxId}" mask="99-9999999"/>
+
+                            <p:outputLabel for="ssn" value="SSN:" />
+                            <p:inputMask id="ssn" value="#{maskView.ssn}" mask="999-99-9999"/>
+
+                            <p:outputLabel for="key"  value="Product Key: " />
+                            <p:inputMask id="key" value="#{maskView.productKey}" mask="a*-999-a999"/>
+
+                            <p:commandButton value="Reset" type="reset" />
+                            <p:commandButton value="Submit" update="display" oncomplete="PF('dlg').show()"/>
+                        </h:panelGrid>
+                        <p:dialog widgetVar="dlg" modal="true" resizable="false" header="Values" showEffect="fade"> 
+                            <p:panelGrid id="display" columns="2" columnClasses="label,value">
+                                <h:outputText value="Date: " />
+                                <h:outputText id="dateValue" value="#{maskView.date}" />
+
+                                <h:outputText value="Phone: " />
+                                <h:outputText id="phoneValue" value="#{maskView.phone}" />
+
+                                <h:outputText value="Phone with Ext: " />
+                                <h:outputText id="phoneWithExtValue" value="#{maskView.phoneExt}"/>
+
+                                <h:outputText value="taxId: " />
+                                <h:outputText id="taxValue" value="#{maskView.taxId}" />
+
+                                <h:outputText value="SSN: " />
+                                <h:outputText id="ssnValue" value="#{maskView.ssn}" />
+
+                                <h:outputText value="Product Key: " />
+                                <h:outputText id="keyValue" value="#{maskView.productKey}" />
+                            </p:panelGrid>
+                        </p:dialog>
+                    </h:form>
+
+
+
+                    <h:form>
+                        <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                            <h:outputText value="Font:" />
+                            <p:selectManyButton value="#{selectManyView.selectedOptions}">
+                                <f:selectItem itemLabel="b" itemValue="b" />
+                                <f:selectItem itemLabel="u" itemValue="u" />
+                                <f:selectItem itemLabel="i" itemValue="i" />
+                            </p:selectManyButton>
+
+                            <p:commandButton value="Submit" update="display" icon="pi pi-check" />
+                            <p:spacer />
+
+                            <h:outputText value="Selected:" />
+                            <p:dataList id="display" value="#{selectManyView.selectedOptions}" var="font" emptyMessage="No fonts selected">
+                                <h:outputText value="#{font}" style="font-weight: bold" />
+                            </p:dataList>
+                        </h:panelGrid>
+                    </h:form>
+
+                    <h:form>
+                        <p:growl id="msg" />
+
+                        <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                            <h:outputText value="Basic: " />
+
+                        </h:panelGrid>
+
+                        <p:commandButton value="Submit" icon="pi pi-check" update="display" oncomplete="PF('dlg').show()" />
+
+                        <p:dialog header="Values" modal="true" resizable="false" showEffect="fade" widgetVar="dlg">
+                            <h:panelGrid columns="1" id="display">
+                                <h:outputText value="Value 1: #{selectBooleanView.value1}" />
+                                <h:outputText value="Value 2: #{selectBooleanView.value2}" />
+                            </h:panelGrid>
+                        </p:dialog>
+                    </h:form>
+
+
+                    <h:form id="form">
+                        <p:growl id="msgs" showDetail="true" />
+
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <p:outputLabel for="inline" value="Inline:" />
+                            <p:calendar id="inline" value="#{calendarView.date1}" mode="inline" />
+
+                            <p:outputLabel for="popup" value="Popup:" />
+                            <p:calendar id="popup" value="#{calendarView.date2}" />
+
+                            <p:outputLabel for="button" value="Button:" />
+                            <p:calendar id="button" value="#{calendarView.date3}" showOn="button" />
+
+                            <p:outputLabel for="event" value="Select Event:" />
+                            <p:calendar id="event" value="#{calendarView.date4}">
+                                <p:ajax event="dateSelect" listener="#{calendarView.onDateSelect}" update="msgs" />
+                            </p:calendar>
+                        </h:panelGrid>
+                    </h:form>
+                    
+                    <h:form>
+    <h:panelGrid columns="2" cellpadding="5">
+        <h:outputText value="Basic: " />
+        <p:password id="nonFeedback" value="#{passwordView.password1}" />
+ 
+        <h:outputText value="Feedback: " />
+        <p:password id="feedback" value="#{passwordView.password2}" feedback="true" />
+ 
+        <h:outputText value="Feedback (Turkish): " />
+        <p:password id="turkishFeedback" value="#{passwordView.password3}" feedback="true"
+                    promptLabel="Lütfen şifre giriniz" weakLabel="Zayıf"
+                    goodLabel="Orta seviye" strongLabel="Güçlü" />
+ 
+        <h:outputText value="Inline Feedback: " />
+        <p:password id="inlineFeedback" value="#{passwordView.password4}" feedback="true" inline="true" />
+    </h:panelGrid>
+     
+    <p:spacer height="10" />
+     
+    <p:separator />
+     
+    <p:messages id="messages" showDetail="true" autoUpdate="true" />
+ 
+    <h:panelGrid columns="2" id="matchGrid" cellpadding="5">                   
+        <h:outputLabel for="pwd1" value="Password 1: *" />
+        <p:password id="pwd1" value="#{passwordView.password5}" match="pwd2" label="Password 1" required="true" />
+ 
+        <h:outputLabel for="pwd2" value="Password 2: *" />
+        <p:password id="pwd2" value="#{passwordView.password5}" label="Password 2" required="true" />
+    </h:panelGrid>
+ 
+    <p:commandButton update="matchGrid" value="Save" />    
+</h:form>
+
+
+
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+
