@@ -11,6 +11,31 @@
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
                 <title>PrimeFaces</title>
             </f:facet>
+            <style type="text/css">
+                .row{
+                    width: 100%;
+                    height: auto;
+                }
+                .col{
+                    width: 32.31%;
+                    height: 200px;       
+                    float: left;
+                    border: 1px solid #ccc;
+                    border-radius: 10px;
+                }
+                .h1{
+                    color:green;
+                    font-weight: 900;
+                    text-align: center;
+                    padding: 5px 15px;
+                }
+                .h2{                 
+                    font-weight: 900;
+                    text-align: center;
+                    font-size: 50px;
+                    padding: 5px 15px;
+                }
+            </style>
         </h:head>
 
         <h:body>
@@ -38,27 +63,77 @@
                     </p:menu>
                 </p:layoutUnit>
 
-                <p:layoutUnit position="center">                   
-                    <h:form>
-                      
-                            <p:panel id="panel1" header="#{dashboardController.dashboard.dashboardTitle}">
-                                <p:panelGrid columns="1">
-                                    <h:outputText value="#{dashboardController.dashboard.todaySales}"/>                                       </p:panelGrid>
-                            </p:panel> 
-                          <p:panel id="panel2" header="#{dashboardController.dashboard.dashboardTitle}">
-                                <p:panelGrid columns="1">
-                                    <h:outputText value="#{dashboardController.dashboard.weeklyAvgSales}"/>                                       </p:panelGrid>
-                            </p:panel> 
-                         <p:panel id="panel3" header="#{dashboardController.dashboard.dashboardTitle}">
-                                <p:panelGrid columns="1">
-                                    <h:outputText value="#{dashboardController.dashboard.mostPurchaseCustomer}"/>                                       </p:panelGrid>
-                            </p:panel> 
-                         <p:panel id="panel4" header="#{dashboardController.dashboard.dashboardTitle}">
-                                <p:panelGrid columns="1">
-                                    <h:outputText value="#{dashboardController.dashboard.totalNoOfCustomers}"/>                                       </p:panelGrid>
-                            </p:panel> 
-                       
-                    </h:form>
+                <p:layoutUnit position="center">  
+                    <div class="row">
+                        <div class="col">
+                            <h1 class="h1">Today's Sales</h1>
+                            <h2 class="h2" ><h:outputText value="#{dashboardController.dashboard.todaySales}"/></h2>
+                        </div>
+                        <div class="col">
+                            <h1 class="h1">Last Month Sales</h1>
+                            <h2 class="h2" ><h:outputText value="#{dashboardController.dashboard.lastMonthSales}"/></h2>
+                        </div>
+                        <div class="col">
+                            <h1 class="h1">Weekly Avg Sales</h1>
+                            <h2 class="h2" ><h:outputText value="#{dashboardController.dashboard.weeklyAvgSales}"/></h2>
+                        </div>
+                    </div>
+
+
+                    
+                       <div class="row">
+                        <div class="col">
+                            <h1 class="h1">Today's Sales</h1>
+                            <h2 class="h2" ><h:outputText value="#{dashboardController.dashboard.todaySales}"/></h2>
+                        </div>
+                        <div class="col">
+                            <h1 class="h1">Today's Sales</h1>
+                            <h2 class="h2" ><h:outputText value="#{dashboardController.dashboard.todaySales}"/></h2>
+                        </div>
+                        <div class="col">
+                            <h1 class="h1">Today's Sales</h1>
+                            <h2 class="h2" ><h:outputText value="#{dashboardController.dashboard.todaySales}"/></h2>
+                        </div>
+                    </div>
+
+                    
+                    
+                       <div class="row">
+                        <div class="col">
+                            <h1 class="h1">Today's Sales</h1>
+                            <h2 class="h2" ><h:outputText value="#{dashboardController.dashboard.todaySales}"/></h2>
+                        </div>
+                        <div class="col">
+                            <h1 class="h1">Today's Sales</h1>
+                            <h2 class="h2" ><h:outputText value="#{dashboardController.dashboard.todaySales}"/></h2>
+                        </div>
+                        <div class="col">
+                            <h1 class="h1">Today's Sales</h1>
+                            <h2 class="h2" ><h:outputText value="#{dashboardController.dashboard.todaySales}"/></h2>
+                        </div>
+                    </div>
+
+
+<!--                    <h:form>
+
+                        <p:panel id="panel1" header="#{dashboardController.dashboard.dashboardTitle}">
+                            <p:panelGrid columns="1">
+                                <h:outputText value="#{dashboardController.dashboard.todaySales}"/>                                       </p:panelGrid>
+                        </p:panel> 
+                        <p:panel id="panel2" header="#{dashboardController.dashboard.dashboardTitle}">
+                            <p:panelGrid columns="1">
+                                <h:outputText value="#{dashboardController.dashboard.weeklyAvgSales}"/>                                       </p:panelGrid>
+                        </p:panel> 
+                        <p:panel id="panel3" header="#{dashboardController.dashboard.dashboardTitle}">
+                            <p:panelGrid columns="1">
+                                <h:outputText value="#{dashboardController.dashboard.mostPurchaseCustomer}"/>                                       </p:panelGrid>
+                        </p:panel> 
+                        <p:panel id="panel4" header="#{dashboardController.dashboard.dashboardTitle}">
+                            <p:panelGrid columns="1">
+                                <h:outputText value="#{dashboardController.dashboard.totalNoOfCustomers}"/>                                       </p:panelGrid>
+                        </p:panel> 
+
+                    </h:form>-->
                 </p:layoutUnit>
 
             </p:layout>
