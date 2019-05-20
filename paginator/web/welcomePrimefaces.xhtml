@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>PrimeFaces</title>
+           
+           </f:facet>
+        <style type="text/css">
+                        .ui-datalist {
+                            width:300px;
+                            margin-bottom: 20px;
+                        }
+
+                        .ui-datalist-item {
+                            padding:3px;
+                        }
+
+                        .paginated .ui-datalist-data {
+                            padding-left: 20px;
+                        }
+                    </style>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    Header
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    Footer
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
+                    <p:menu>
+                        <p:submenu label="Resources">
+                            <p:menuitem value="Demo" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
+                            <p:menuitem value="Documentation" url="http://www.primefaces.org/documentation.html" />
+                            <p:menuitem value="Forum" url="http://forum.primefaces.org/" />
+                            <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
+
+                        </p:submenu>
+
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    Welcome to PrimeFaces Paginator
+                   
+
+
+                    <h:form id="form">
+                        <p:dataList value="#{dataListView.cars1}" var="car" type="ordered">
+                            <f:facet name="header">
+                                Basic
+                            </f:facet>
+                            #{car.brand}, #{car.year}
+                        </p:dataList>
+
+                        <p:dataList value="#{dataListView.cars2}" var="car" type="definition">
+                            <f:facet name="header">
+                                Definition
+                            </f:facet>
+                            Brand: #{car.brand}, Year: #{car.year}
+                            <f:facet name="description">
+                                <p:graphicImage name="demo/images/car/#{car.brand}.gif"/> 
+                            </f:facet>
+                        </p:dataList>
+
+                        <p:dataList value="#{dataListView.cars3}" var="car" type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated">
+                            <f:facet name="header">
+                                Paginator
+                            </f:facet>
+                            <p:commandLink update=":form:carDetail" oncomplete="PF('carDialog').show()" title="View Detail" styleClass="ui-icon pi pi-search" style="float:left;margin-right:10px;margin-top:3px; color:#333333">
+                                <f:setPropertyActionListener value="#{car}" target="#{dataListView.selectedCar}" />
+                                <h:outputText value="#{car.brand}, #{car.year}" />
+                            </p:commandLink>
+                            <h:outputText value="#{car.brand}, #{car.year}" style="display:inline-block"/>
+                        </p:dataList>
+
+                        <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+                            <p:outputPanel id="carDetail" style="text-align:center;">
+                                <p:panelGrid  columns="2" rendered="#{not empty dataListView.selectedCar}" columnClasses="label,value">
+                                    <f:facet name="header">
+                                        <p:graphicImage name="demo/images/car/#{dataListView.selectedCar.brand}-big.gif"/> 
+                                    </f:facet>
+
+                                    <h:outputText value="Id:" />
+                                    <h:outputText value="#{dataListView.selectedCar.id}" />
+
+                                    <h:outputText value="Year" />
+                                    <h:outputText value="#{dataListView.selectedCar.year}" />
+
+                                    <h:outputText value="Color:" />
+                                    <h:outputText value="#{dataListView.selectedCar.color}" style="color:#{dataListView.selectedCar.color}"/>
+
+                                    <h:outputText value="Price" />
+                                    <h:outputText value="$#{dataListView.selectedCar.price}" />
+                                </p:panelGrid>
+                            </p:outputPanel>
+                        </p:dialog>
+                    </h:form>
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+
