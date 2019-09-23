@@ -1,0 +1,14 @@
+
+    create table
+	============
+	
+	create table location (l_id integer(10), zilla varchar(45), thana varchar(45));
+	
+	
+	
+	insert data
+	===========
+	insert into location(l_id, zilla, thana) values(01, 'zilla', 'thana');
+	
+	
+

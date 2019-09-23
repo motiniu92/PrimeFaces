@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>PrimeFaces</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    Header
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    Footer
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
+                    <p:menu>
+                        <p:submenu label="Resources">
+                            <p:menuitem value="Receice Order" url="receiveOrder.xhtml" />
+
+                            <p:menuitem value="Buying Chemical" url="buyingChemical.xhtml" />
+
+                            <p:menuitem value="Buying Thread" url="buyingThread.xhtml" />
+                            <p:menuitem value="Knitting Section" url="knittingSection.xhtml" />
+                            <p:menuitem value="Dyeing Section" url="dyeingSection.xhtml" />
+                            <p:menuitem value="Finishing Section" url="finishingSection.xhtml" />
+                            <p:menuitem value="Summary" url="summary.xhtml" />
+
+
+                        </p:submenu>
+
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <br/>
+                    <h:form>
+                        <p:outputLabel value="Fabric Name  : "/>
+                        <p:inputText value="#{studentController.student.id}"/>
+                        <br/><br/>
+
+                        <p:outputLabel value="Product Qty :"/>
+                        <p:inputText value="#{studentController.student.id}"/>
+                        <br/><br/>
+
+                        <p:outputLabel value="Height :"/>
+                        <p:inputText value="#{studentController.student.id}"/>
+                        <br/><br/>
+
+                        <p:outputLabel value="Width:"/>
+                        <p:inputText value="#{studentController.student.id}"/>
+                        <br/><br/>
+
+                        <p:outputLabel value="Color Name  : "/>
+                        <p:inputText value="#{studentController.student.id}"/>
+                        <br/><br/>
+                        <p:outputLabel  value="Delivery Date:" />
+                        <p:inputMask id="delivery_date" value="#{studentController.date}" mask="99/99/9999"/> 
+
+                        
+                         <br/><br/>
+                        <p:commandButton action="#{studentController.saveStudent()}" value="Submit"/>
+                       
+                    </h:form>
+                    <br/><br/>
+                    <p:dataTable var="stu" value="#{studentController.student}">
+                        <p:column headerText="Fabric Name">
+                            <h:outputText value="#{stu.id}"/>
+                        </p:column>
+
+                        <p:column headerText="Product Qty">
+                            <h:outputText value="#{stu.id}"/>
+                        </p:column>
+
+                        <p:column headerText="Height">
+                            <h:outputText value="#{stu.id}"/>
+                        </p:column>
+
+                        <p:column headerText="Width">
+                            <h:outputText value="#{stu.id}"/>
+                        </p:column>
+
+                        <p:column headerText="Color Name">
+                            <h:outputText value="#{stu.id}"/>
+                        </p:column>
+
+                        <p:column headerText="Delivery Date">
+                            <h:outputText value="#{stu.courseStartDate}">
+                                <f:convertDateTime pattern="dd-MM-yyyy"/>
+                            </h:outputText>
+                        </p:column>
+                    </p:dataTable>
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+
